@@ -1,0 +1,1049 @@
+/* CSS Root Variables: Define global colors, fonts, and design tokens used throughout the app */
+:root {
+  /* Typography: System font stack with fallbacks for cross-platform consistency */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 14px; /* Base font size for entire application */
+  line-height: 1.6; /* Default line height for readability */
+  font-weight: 400; /* Default font weight (normal) */
+
+  /* Background Colors: Primary and secondary colors for light theme */
+  --bg-primary: #f9fafb; /* Light gray background for overall app */
+  --bg-secondary: #ffffff; /* White background for chat area */
+  --bg-sidebar: #1e293b; /* Dark blue-gray for sidebar */
+  
+  /* Text Colors: For different text hierarchy levels */
+  --text-primary: #111827; /* Dark text for main content */
+  --text-secondary: #4b5563; /* Medium gray for secondary text */
+  --text-light: #9ca3af; /* Light gray for subtle text */
+  
+  /* Border and UI Elements */
+  --border-color: #e5e7eb; /* Light gray for borders */
+  --accent-blue: #3b82f6; /* Primary brand blue */
+  --accent-blue-hover: #2563eb; /* Darker blue for hover states */
+  --accent-green: #10b981; /* Green for success indicators */
+  
+  /* Message Bubbles: Different backgrounds for user and bot messages */
+  --user-msg-bg: #3b82f6; /* Blue for user messages */
+  --bot-msg-bg: #f9fafb; /* Light gray for bot messages */
+  
+  /* Error Styling */
+  --error-bg: #fef2f2; /* Very light red for error backgrounds */
+  --error-border: #ef4444; /* Bright red for error borders */
+
+  /* Font Rendering: Performance and quality improvements for modern browsers */
+  font-synthesis: none; /* Prevent synthetic font styles */
+  text-rendering: optimizeLegibility; /* Optimize text rendering for readability */
+  -webkit-font-smoothing: antialiased; /* Smooth font rendering on macOS */
+  -moz-osx-font-smoothing: grayscale; /* Font smoothing for Firefox on macOS */
+}
+
+/* Global Reset: Remove default browser margins, padding, and set box-sizing model */
+* {
+  margin: 0; /* Remove default margins from all elements */
+  padding: 0; /* Remove default padding from all elements */
+  box-sizing: border-box; /* Include padding and border in element dimensions */
+}
+
+/* Body Styling: Set background and text colors for the entire page */
+body {
+  margin: 0; /* Remove body margin */
+  background: var(--bg-primary); /* Light gray background */
+  color: var(--text-primary); /* Dark text color */
+}
+
+/* Root Container: Fill the entire viewport */
+#root {
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  overflow: hidden; /* Hide overflow, prevents scrollbars */
+}
+
+/* Dashboard Layout: Main flex container for sidebar and chat area */
+.dashboard-container {
+  display: flex; /* Enable flexbox layout */
+  width: 100%; /* Full width */
+  height: 100vh; /* Full viewport height */
+  background: var(--bg-primary); /* Light background */
+}
+
+/* Sidebar: Left navigation panel with dark background */
+.sidebar {
+  width: 280px; /* Fixed sidebar width */
+  background: var(--bg-sidebar); /* Dark blue-gray background */
+  color: white; /* White text for contrast */
+  display: flex; /* Flexbox for vertical layout */
+  flex-direction: column; /* Stack items vertically */
+  margin: 12px; /* Margin around sidebar */
+  margin-right: 0; /* No right margin (adjacent to chat area) */
+  border-radius: 16px; /* Rounded corners */
+  overflow: hidden; /* Hide content that exceeds border radius */
+}
+
+/* Sidebar Header: Title section at the top */
+.sidebar-header {
+  padding: 24px 20px; /* Space inside header */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider line */
+}
+
+/* Sidebar Title: Main heading in header */
+.sidebar-header h2 {
+  font-size: 18px; /* Larger title text */
+  font-weight: 600; /* Semi-bold weight */
+  margin-bottom: 4px; /* Space below title */
+  color: white; /* White text */
+  letter-spacing: -0.01em; /* Tighter letter spacing */
+}
+
+/* Subtitle: Small descriptive text in header */
+.subtitle {
+  font-size: 12px; /* Small text */
+  color: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+  font-weight: 400; /* Normal weight */
+}
+
+/* New Chat Button: Primary action button to create conversation */
+.new-chat-btn {
+  margin: 16px 16px 20px 16px; /* Spacing around button */
+  padding: 12px; /* Internal padding */
+  background: var(--accent-blue); /* Blue background */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 14px; /* Text size */
+  font-weight: 600; /* Semi-bold text */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: all 0.2s; /* Smooth animation for state changes */
+  display: flex; /* Flexbox for centering content */
+  align-items: center; /* Vertically center items */
+  justify-content: center; /* Horizontally center items */
+  gap: 8px; /* Space between icon and text */
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3); /* Subtle shadow */
+}
+
+/* New Chat Button Hover: Interactive state when hovering */
+.new-chat-btn:hover {
+  background: var(--accent-blue-hover); /* Darker blue */
+  transform: translateY(-1px); /* Slight upward movement */
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4); /* More pronounced shadow */
+}
+
+/* Plus Icon: Styling for the + icon inside the button */
+.plus-icon {
+  font-size: 18px; /* Larger icon size */
+  font-weight: bold; /* Bold appearance */
+}
+
+/* Conversation List: Container for all conversation items */
+.conversation-list {
+  flex: 1; /* Take remaining vertical space */
+  overflow-y: auto; /* Vertical scrolling when overflowing */
+  padding: 0 8px; /* Horizontal padding */
+}
+
+/* Conversation List Scrollbar: Styling for webkit browsers */
+.conversation-list::-webkit-scrollbar {
+  width: 6px; /* Thin scrollbar width */
+}
+
+/* Scrollbar Thumb: The draggable part of the scrollbar */
+.conversation-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+  border-radius: 3px; /* Rounded scrollbar corners */
+}
+
+/* Chat Group: Container for conversations grouped by time period */
+.chat-group {
+  margin-bottom: 24px; /* Space between groups */
+}
+
+/* Group Label: Time period labels (Today, Yesterday, etc.) */
+.group-label {
+  font-size: 11px; /* Small uppercase text */
+  font-weight: 600; /* Bold weight */
+  text-transform: uppercase; /* Convert to uppercase */
+  letter-spacing: 0.5px; /* Wider letter spacing */
+  color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+  padding: 8px 12px; /* Internal spacing */
+  margin: 0; /* No margins */
+}
+
+/* Chat Item: Individual conversation button */
+.chat-item {
+  width: 100%; /* Full width of container */
+  padding: 10px 12px; /* Internal padding */
+  background: transparent; /* No background by default */
+  color: rgba(255, 255, 255, 0.8); /* Semi-transparent white text */
+  border: none; /* No border */
+  border-radius: 8px; /* Slightly rounded corners */
+  font-size: 13px; /* Small text */
+  cursor: pointer; /* Pointer on hover */
+  transition: all 0.15s; /* Smooth transitions */
+  display: flex; /* Flexbox for alignment */
+  align-items: center; /* Vertically center items */
+  gap: 10px; /* Space between icon and title */
+  text-align: left; /* Left-align text */
+  margin-bottom: 4px; /* Space below item */
+  border-left: 3px solid transparent; /* Left border for active state */
+}
+
+/* Chat Item Hover: Highlight when hovering */
+.chat-item:hover {
+  background: rgba(255, 255, 255, 0.1); /* Slight background tint */
+}
+
+/* Chat Item Active: Styling for the selected conversation */
+.chat-item.active {
+  background: rgba(59, 130, 246, 0.2); /* Blue tinted background */
+  border-left-color: var(--accent-blue); /* Blue left border */
+  color: white; /* Full white text */
+}
+
+/* Chat Icon: Emoji icon before conversation title */
+.chat-icon {
+  font-size: 14px; /* Moderate icon size */
+  flex-shrink: 0; /* Don't shrink this element */
+}
+
+/* Chat Title: Conversation name/title text */
+.chat-title {
+  flex: 1; /* Take remaining space */
+  overflow: hidden; /* Hide overflow */
+  text-overflow: ellipsis; /* Show ... when text overflows */
+  white-space: nowrap; /* Keep on single line */
+}
+
+/* Config Section: Container for API configuration inputs in sidebar */
+.config-section {
+  flex: 1; /* Take remaining space */
+  padding: 24px 20px; /* Internal padding */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+
+/* Config Section Heading: Title for configuration area */
+.config-section h3 {
+  font-size: 12px; /* Small uppercase heading */
+  font-weight: 600; /* Bold weight */
+  text-transform: uppercase; /* Convert to uppercase */
+  letter-spacing: 0.5px; /* Wider spacing */
+  color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+  margin-bottom: 16px; /* Space below heading */
+}
+
+/* Config Group: Individual configuration input group */
+.config-group {
+  margin-bottom: 20px; /* Space between groups */
+}
+
+/* Config Label: Text label for inputs */
+.config-group label {
+  display: block; /* Full width */
+  font-size: 13px; /* Small text */
+  font-weight: 500; /* Medium weight */
+  color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+  margin-bottom: 8px; /* Space below label */
+}
+
+/* Config Input: Text input fields in sidebar */
+.config-input {
+  width: 100%; /* Full width of container */
+  padding: 12px 14px; /* Internal padding */
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+  border-radius: 10px; /* Rounded corners */
+  color: white; /* White text */
+  font-size: 13px; /* Small text */
+  outline: none; /* Remove default outline */
+  transition: all 0.2s; /* Smooth transitions */
+  font-family: 'Courier New', monospace; /* Monospace font for API URLs */
+}
+
+/* Config Input Placeholder: Placeholder text styling */
+.config-input::placeholder {
+  color: rgba(255, 255, 255, 0.4); /* Lighter transparent text */
+}
+
+/* Config Input Focus: Styling when input is focused */
+.config-input:focus {
+  background: rgba(255, 255, 255, 0.15); /* More opaque background */
+  border-color: var(--accent-blue); /* Blue border on focus */
+}
+
+/* Sidebar Footer: Bottom section of sidebar with status indicator */
+.sidebar-footer {
+  padding: 20px; /* Internal padding */
+  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Top border divider */
+}
+
+/* Status Indicator: Shows connection status */
+.status-indicator {
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Vertically center items */
+  gap: 8px; /* Space between dot and text */
+  font-size: 13px; /* Small text */
+  color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+}
+
+/* Status Dot: Animated circle showing connection status */
+.status-dot {
+  width: 8px; /* Small circle size */
+  height: 8px; /* Square dimensions */
+  background: var(--accent-green); /* Green color for connected */
+  border-radius: 50%; /* Make circular */
+  animation: pulse 2s infinite; /* Continuous pulsing animation */
+}
+
+/* Pulse Animation: Fading effect for status indicator */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1; /* Full opacity at start and end */
+  }
+  50% {
+    opacity: 0.5; /* Semi-transparent in middle */
+  }
+}
+
+/* Main Chat Area: Right side content area with messages and input */
+.chat-area {
+  flex: 1; /* Take remaining space */
+  display: flex; /* Flexbox for vertical layout */
+  flex-direction: column; /* Stack items vertically */
+  background: var(--bg-secondary); /* White background */
+  margin: 12px; /* Margin around chat area */
+  border-radius: 16px; /* Rounded corners */
+  overflow: hidden; /* Hide overflow content */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Chat Header: Top bar with title and message count */
+.chat-header {
+  background: var(--bg-secondary); /* White background */
+  padding: 20px 32px; /* Internal padding */
+  border-bottom: 1px solid var(--border-color); /* Bottom divider */
+  display: flex; /* Flexbox for layout */
+  justify-content: space-between; /* Space content apart */
+  align-items: center; /* Vertically center items */
+}
+
+/* Chat Header Title: Main heading */
+.chat-header h1 {
+  font-size: 24px; /* Large heading */
+  font-weight: 600; /* Semi-bold */
+  color: var(--text-primary); /* Dark text */
+  letter-spacing: -0.02em; /* Tighter spacing */
+  margin-bottom: 2px; /* Space below */
+}
+
+/* Chat Subtitle: Subtitle below main heading */
+.chat-subtitle {
+  font-size: 13px; /* Small text */
+  color: var(--text-secondary); /* Medium gray */
+  font-weight: 400; /* Normal weight */
+}
+
+/* Chat Info: Right side info text (message count) */
+.chat-info {
+  font-size: 13px; /* Small text */
+  color: var(--text-secondary); /* Medium gray */
+}
+
+/* Error Banner: Alert box for displaying errors */
+.error-banner {
+  background: var(--error-bg); /* Very light red background */
+  border-left: 4px solid var(--error-border); /* Red left border */
+  padding: 16px 20px; /* Internal padding */
+  margin: 16px 32px; /* Margin around banner */
+  border-radius: 12px; /* Rounded corners */
+  display: flex; /* Flexbox layout */
+  align-items: flex-start; /* Align to top */
+  gap: 12px; /* Space between elements */
+  animation: slideDown 0.3s ease-out; /* Slide down animation */
+}
+
+/* Slide Down Animation: Error appears from top */
+@keyframes slideDown {
+  from {
+    opacity: 0; /* Start transparent */
+    transform: translateY(-10px); /* Start above position */
+  }
+  to {
+    opacity: 1; /* End opaque */
+    transform: translateY(0); /* End at normal position */
+  }
+}
+
+/* Error Icon: Warning emoji styling */
+.error-icon {
+  font-size: 20px; /* Large emoji size */
+  flex-shrink: 0; /* Don't shrink */
+}
+
+/* Error Content: Text container inside error banner */
+.error-content {
+  flex: 1; /* Take remaining space */
+}
+
+/* Error Title: Bold error heading */
+.error-content strong {
+  display: block; /* Full width */
+  color: var(--error-border); /* Red text */
+  font-size: 14px; /* Regular text size */
+  font-weight: 600; /* Semi-bold */
+  margin-bottom: 4px; /* Space below */
+}
+
+/* Error Message: Descriptive error text */
+.error-content p {
+  color: var(--text-secondary); /* Medium gray text */
+  font-size: 13px; /* Small text */
+  margin: 0; /* No margins */
+}
+
+/* Error Close Button: X button to dismiss error */
+.error-close {
+  background: none; /* No background */
+  border: none; /* No border */
+  color: var(--text-secondary); /* Gray text */
+  font-size: 24px; /* Large X symbol */
+  cursor: pointer; /* Pointer on click */
+  padding: 0; /* No padding */
+  width: 24px; /* Fixed width */
+  height: 24px; /* Fixed height */
+  display: flex; /* Flexbox for centering */
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  border-radius: 4px; /* Slightly rounded */
+  transition: all 0.15s; /* Smooth transitions */
+}
+
+/* Error Close Button Hover: Highlight on hover */
+.error-close:hover {
+  background: rgba(0, 0, 0, 0.05); /* Subtle background */
+}
+
+/* Empty State: Container shown when no messages exist */
+.empty-state {
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  padding: 60px 20px; /* Internal padding */
+  text-align: center; /* Center text */
+  min-height: 400px; /* Minimum height */
+}
+
+/* Empty Icon: Large emoji in empty state */
+.empty-icon {
+  font-size: 64px; /* Very large emoji */
+  margin-bottom: 20px; /* Space below */
+}
+
+/* Empty State Heading: Title when chat is empty */
+.empty-state h3 {
+  font-size: 22px; /* Large heading */
+  font-weight: 600; /* Semi-bold */
+  color: var(--text-primary); /* Dark text */
+  margin-bottom: 8px; /* Space below */
+}
+
+/* Empty State Description: Subtitle when chat is empty */
+.empty-state p {
+  font-size: 15px; /* Regular text size */
+  color: var(--text-secondary); /* Medium gray */
+  margin-bottom: 32px; /* Space below */
+}
+
+/* Suggested Prompts: Grid of suggested messages */
+.suggested-prompts {
+  display: grid; /* Grid layout */
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  gap: 12px; /* Space between items */
+  max-width: 600px; /* Maximum width */
+}
+
+/* Prompt Button: Individual suggestion button */
+.prompt-btn {
+  padding: 14px 20px; /* Internal padding */
+  background: white; /* White background */
+  border: 2px solid var(--border-color); /* Light gray border */
+  border-radius: 12px; /* Rounded corners */
+  font-size: 14px; /* Regular text */
+  color: var(--text-primary); /* Dark text */
+  cursor: pointer; /* Pointer on click */
+  transition: all 0.2s; /* Smooth transitions */
+  text-align: left; /* Left-align text */
+  font-family: inherit; /* Use inherited font */
+}
+
+/* Prompt Button Hover: Highlight on hover */
+.prompt-btn:hover {
+  border-color: var(--accent-blue); /* Blue border */
+  background: rgba(59, 130, 246, 0.05); /* Slight blue tint */
+  transform: translateY(-2px); /* Slight upward movement */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+}
+
+/* Messages Wrapper: Container holding messages and scrollbar */
+.messages-wrapper {
+  flex: 1; /* Take remaining space */
+  overflow: hidden; /* Hide overflow */
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack vertically */
+}
+
+/* Messages List: Scrollable container for all messages */
+.messages-list {
+  flex: 1; /* Take remaining space */
+  overflow-y: auto; /* Vertical scrolling */
+  padding: 24px 0 80px 0; /* Space around messages, extra bottom for input */
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack messages vertically */
+}
+
+/* Messages List Scrollbar: Custom scrollbar styling */
+.messages-list::-webkit-scrollbar {
+  width: 10px; /* Scrollbar width */
+}
+
+/* Scrollbar Track: Background of scrollbar */
+.messages-list::-webkit-scrollbar-track {
+  background: transparent; /* Transparent background */
+  margin: 8px 0; /* Vertical margin */
+}
+
+/* Scrollbar Thumb: Draggable part of scrollbar */
+.messages-list::-webkit-scrollbar-thumb {
+  background: var(--border-color); /* Light gray color */
+  border-radius: 5px; /* Rounded corners */
+  border: 2px solid transparent; /* Transparent border */
+  background-clip: padding-box; /* Proper border display */
+}
+
+/* Scrollbar Thumb Hover: Highlight on hover */
+.messages-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-light); /* Darker gray on hover */
+  background-clip: padding-box; /* Proper border display */
+}
+
+/* Message: Individual message container */
+.message {
+  display: flex; /* Flexbox layout */
+  gap: 12px; /* Space between avatar and content */
+  padding: 16px 32px; /* Internal padding */
+  animation: fadeIn 0.3s ease-out; /* Fade in animation */
+  position: relative; /* For positioning action buttons */
+}
+
+/* Message Hover: Show action buttons on hover */
+.message:hover .message-actions {
+  opacity: 1; /* Make buttons visible */
+}
+
+/* Fade In Animation: Messages appear smoothly */
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Start transparent */
+    transform: translateY(10px); /* Start below */
+  }
+  to {
+    opacity: 1; /* End opaque */
+    transform: translateY(0); /* End at normal position */
+  }
+}
+
+/* Message Avatar: Profile picture/emoji for user or bot */
+.message-avatar {
+  width: 32px; /* Fixed square size */
+  height: 32px; /* Fixed square size */
+  flex-shrink: 0; /* Don't shrink */
+  display: flex; /* Flexbox for centering */
+  align-items: center; /* Vertically center */
+  justify-content: center; /* Horizontally center */
+  font-size: 18px; /* Large emoji size */
+  background: var(--bg-secondary); /* White background */
+  border-radius: 50%; /* Make circular */
+  border: 2px solid var(--border-color); /* Light border */
+}
+
+/* User Message Avatar: Gradient background for user */
+.message.user .message-avatar {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+  border-color: transparent; /* Transparent border */
+}
+
+/* Bot Message Avatar: Gradient background for bot */
+.message.bot .message-avatar {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); /* Blue gradient */
+  border-color: transparent; /* Transparent border */
+}
+
+/* Message Wrapper: Container for sender info and content */
+.message-wrapper {
+  flex: 1; /* Take remaining space */
+  max-width: calc(100% - 44px); /* Don't exceed chat width minus avatar */
+}
+
+/* Message Sender: Name/label of who sent the message */
+.message-sender {
+  font-size: 13px; /* Small text */
+  font-weight: 600; /* Semi-bold */
+  margin-bottom: 6px; /* Space below sender name */
+  color: var(--text-primary); /* Dark text */
+}
+
+/* Message Bubble: Main message container */
+.message-bubble {
+  font-size: 15px; /* Regular text size */
+  line-height: 1.6; /* Readable line height */
+  color: var(--text-primary); /* Dark text */
+  word-wrap: break-word; /* Break long words */
+}
+
+/* Message Actions: Container for action buttons (copy, etc.) */
+.message-actions {
+  position: absolute; /* Position relative to message */
+  top: 16px; /* Distance from top */
+  right: 32px; /* Distance from right */
+  opacity: 0; /* Hidden by default */
+  transition: opacity 0.2s; /* Smooth fade in/out */
+  display: flex; /* Flexbox layout */
+  gap: 4px; /* Space between buttons */
+}
+
+/* Action Button: Individual action button (copy, etc.) */
+.action-btn {
+  padding: 6px 10px; /* Small padding */
+  background: white; /* White background */
+  border: 1px solid var(--border-color); /* Light border */
+  border-radius: 6px; /* Slightly rounded */
+  font-size: 12px; /* Small text */
+  color: var(--text-secondary); /* Medium gray text */
+  cursor: pointer; /* Pointer on click */
+  transition: all 0.15s; /* Smooth transitions */
+  display: flex; /* Flexbox for alignment */
+  align-items: center; /* Vertically center */
+  gap: 4px; /* Space between icon and text */
+}
+
+/* Action Button Hover: Highlight on hover */
+.action-btn:hover {
+  background: var(--bg-secondary); /* Slightly darker background */
+  border-color: var(--accent-blue); /* Blue border */
+  color: var(--accent-blue); /* Blue text */
+}
+
+/* User Message: Styling for messages sent by user */
+.user-message {
+  align-self: flex-end; /* Align to the right */
+}
+
+/* Bot Message: Styling for messages from the bot */
+.bot-message {
+  align-self: flex-start; /* Align to the left */
+}
+
+/* Message Content: The actual message bubble with text */
+.message-content {
+  padding: 16px 20px; /* Internal padding */
+  border-radius: 16px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+}
+
+/* User Message Content: Styling for user-sent messages */
+.user-message .message-content {
+  background: var(--user-msg-bg); /* Blue background */
+  color: white; /* White text */
+  border-bottom-right-radius: 6px; /* Sharper bottom-right corner */
+}
+
+/* Bot Message Content: Styling for bot-sent messages */
+.bot-message .message-content {
+  background: var(--bot-msg-bg); /* Light gray background */
+  color: var(--text-primary); /* Dark text */
+  border-bottom-left-radius: 6px; /* Sharper bottom-left corner */
+  border: 1px solid var(--border-color); /* Light border */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+/* Message Content Paragraph: Text inside message bubble */
+.message-content p {
+  margin: 0; /* No margins */
+  word-wrap: break-word; /* Break long words */
+  font-size: 15px; /* Regular text size */
+  line-height: 1.6; /* Readable line height */
+}
+
+/* Message Content Bold: Bold text inside messages */
+.message-content strong {
+  font-weight: 600; /* Semi-bold weight */
+}
+
+/* Message Bubble Bold: Bold text in message bubbles */
+.message-bubble strong {
+  font-weight: 600; /* Semi-bold weight */
+  color: var(--text-primary); /* Dark text color */
+}
+
+/* Message Time: Timestamp display under messages */
+.message-time {
+  display: block; /* Full width */
+  font-size: 12px; /* Small text */
+  margin-top: 8px; /* Space above timestamp */
+  opacity: 0.6; /* Semi-transparent */
+  font-weight: 400; /* Normal weight */
+}
+
+/* User Message Time: Right-aligned timestamp for user messages */
+.user-message .message-time {
+  text-align: right; /* Right-align text */
+}
+
+/* Typing Indicator: Container for the bot typing animation */
+.typing-indicator {
+  padding: 14px 18px !important; /* Internal padding (important to override message-content) */
+  background: var(--bot-msg-bg) !important; /* Light gray background */
+  border: 1px solid var(--border-color) !important; /* Light border */
+}
+
+/* Typing Dots: Container for animated dots */
+.typing-dots {
+  display: flex; /* Flexbox layout */
+  gap: 6px; /* Space between dots */
+  align-items: center; /* Vertically center */
+  height: 20px; /* Fixed height */
+}
+
+/* Individual Typing Dot: Animated dot in typing indicator */
+.typing-dots span {
+  width: 12px; /* Small circle */
+  height: 12px; /* Small circle */
+  background: var(--accent-blue); /* Blue color */
+  border-radius: 50%; /* Make circular */
+  animation: typing 1.4s infinite ease-in-out; /* Bouncing animation */
+}
+
+/* Second Typing Dot: Stagger animation */
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s; /* Delayed start */
+}
+
+/* Third Typing Dot: Stagger animation */
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s; /* More delayed start */
+}
+
+/* Typing Animation: Bouncing effect for dots */
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0); /* Normal position */
+    opacity: 0.5; /* Semi-transparent */
+  }
+  30% {
+    transform: translateY(-8px); /* Move up */
+    opacity: 1; /* Full opacity */
+  }
+}
+
+/* Input Area: Footer section containing message input field */
+.input-area {
+  background: var(--bg-secondary); /* White background */
+  padding: 20px 32px; /* Internal padding */
+  border-top: 1px solid var(--border-color); /* Top border divider */
+}
+
+/* Input Form: Flex container for input and send button */
+.input-form {
+  display: flex; /* Flexbox layout */
+  gap: 12px; /* Space between input and button */
+  max-width: 1000px; /* Maximum width */
+}
+
+/* Message Input: Text input field for typing messages */
+.message-input {
+  flex: 1; /* Take remaining space */
+  padding: 14px 18px; /* Internal padding */
+  border: 2px solid var(--border-color); /* Light border */
+  border-radius: 12px; /* Rounded corners */
+  font-size: 15px; /* Regular text size */
+  outline: none; /* Remove default outline */
+  transition: border-color 0.2s, box-shadow 0.2s; /* Smooth transitions */
+  font-family: inherit; /* Use inherited font */
+  background: white; /* White background */
+  color: var(--text-primary); /* Dark text */
+  line-height: 1.5; /* Readable line height */
+}
+
+/* Message Input Focus: Styling when input is focused */
+.message-input:focus {
+  border-color: var(--accent-blue); /* Blue border */
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); /* Blue glow effect */
+}
+
+/* Message Input Placeholder: Placeholder text styling */
+.message-input::placeholder {
+  color: var(--text-light); /* Light gray text */
+}
+
+/* Send Button: Button to send messages */
+.send-btn {
+  padding: 14px 28px; /* Internal padding */
+  background: var(--accent-blue); /* Blue background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 12px; /* Rounded corners */
+  font-size: 14px; /* Regular text size */
+  font-weight: 600; /* Semi-bold */
+  cursor: pointer; /* Pointer on click */
+  transition: all 0.2s; /* Smooth transitions */
+  font-family: inherit; /* Use inherited font */
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Vertically center */
+  gap: 8px; /* Space between text and icon */
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2); /* Subtle shadow */
+}
+
+/* Send Button Hover: Highlight on hover */
+.send-btn:hover {
+  background: var(--accent-blue-hover); /* Darker blue */
+  transform: translateY(-1px); /* Slight upward movement */
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); /* More pronounced shadow */
+}
+
+/* Send Button Active: Styling when clicked */
+.send-btn:active {
+  transform: translateY(0); /* Return to normal position */
+}
+
+/* Send Icon: Styling for the arrow icon */
+.send-icon {
+  font-size: 16px; /* Moderate icon size */
+  font-weight: bold; /* Bold appearance */
+}
+
+/* Responsive Design: Mobile and tablet layouts */
+@media (max-width: 768px) {
+  /* Sidebar: Narrower on smaller screens */
+  .sidebar {
+    width: 250px; /* Reduced width */
+  }
+  
+  /* Message: Don't exceed 90% of screen width on mobile */
+  .message {
+    max-width: 90%; /* Limited width */
+  }
+  
+  /* Messages List: Less padding on mobile */
+  .messages-list {
+    padding: 16px; /* Reduced padding */
+  }
+  
+  /* Input Area: Less padding on mobile */
+  .input-area {
+    padding: 16px; /* Reduced padding */
+  }
+}
+
+/* Chat Header Heading: Duplicate style for redundancy */
+.chat-header h1 {
+  font-size: 24px; /* Large heading size */
+  margin-bottom: 5px; /* Space below */
+  font-weight: 600; /* Semi-bold */
+}
+
+/* Chat Header Paragraph: Styling for description text */
+.chat-header p {
+  font-size: 14px; /* Regular text size */
+  opacity: 0.9; /* Slightly transparent */
+}
+
+/* API Config: Container for API configuration section */
+.api-config {
+  margin-top: 12px; /* Space above */
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack vertically */
+  gap: 8px; /* Space between items */
+}
+
+/* API Row: Horizontal layout for API inputs */
+.api-row {
+  display: flex; /* Flexbox layout */
+  gap: 8px; /* Space between inputs */
+}
+
+/* API URL Input: Text field for API URL */
+.api-url-input,
+.api-key-input {
+  width: 100%; /* Full width */
+  padding: 10px 14px; /* Internal padding */
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Semi-transparent border */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 13px; /* Small text */
+  background: rgba(255, 255, 255, 0.15); /* Semi-transparent background */
+  color: white; /* White text */
+  outline: none; /* Remove default outline */
+  transition: all 0.2s; /* Smooth transitions */
+  font-family: 'Courier New', monospace; /* Monospace font for URLs */
+}
+
+/* API Key Input: Text field for API key (takes remaining space) */
+.api-key-input {
+  flex: 1; /* Take remaining space */
+}
+
+/* API Select: Dropdown for selecting API endpoint */
+.api-select {
+  padding: 10px 14px; /* Internal padding */
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Semi-transparent border */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 12px; /* Small text */
+  background: rgba(255, 255, 255, 0.15); /* Semi-transparent background */
+  color: white; /* White text */
+  outline: none; /* Remove default outline */
+  transition: all 0.2s; /* Smooth transitions */
+  cursor: pointer; /* Pointer on click */
+  min-width: 180px; /* Minimum width for dropdown */
+}
+
+/* API Select Options: Styling for dropdown options */
+.api-select option {
+  background: #667eea; /* Blue background */
+  color: white; /* White text */
+}
+
+/* API Input Placeholders: Placeholder text for API inputs */
+.api-url-input::placeholder,
+.api-key-input::placeholder {
+  color: rgba(255, 255, 255, 0.6); /* Semi-transparent white */
+}
+
+/* API URL Input Focus: Styling when URL input is focused */
+.api-url-input:focus {
+  background: rgba(255, 255, 255, 0.25); /* More opaque background */
+  border-color: rgba(255, 255, 255, 0.5); /* More opaque border */
+}
+
+/* API Key Input Focus: Styling when key input is focused */
+.api-key-input:focus {
+  background: rgba(255, 255, 255, 0.25); /* More opaque background */
+  border-color: rgba(255, 255, 255, 0.5); /* More opaque border */
+}
+
+/* API Select Focus: Styling when select is focused */
+.api-select:focus {
+  background: rgba(255, 255, 255, 0.25); /* More opaque background */
+  border-color: rgba(255, 255, 255, 0.5); /* More opaque border */
+}
+
+/* Messages Container: Scrollable container for messages (alternative layout) */
+.messages-container {
+  flex: 1; /* Take remaining space */
+  overflow-y: auto; /* Vertical scrolling */
+  padding: 20px; /* Internal padding */
+  display: flex; /* Flexbox layout */
+  flex-direction: column; /* Stack vertically */
+  gap: 12px; /* Space between messages */
+  background: #f8f9fa; /* Light background color */
+}
+
+/* Messages Container Scrollbar: Custom scrollbar styling */
+.messages-container::-webkit-scrollbar {
+  width: 6px; /* Thin scrollbar */
+}
+
+/* Messages Container Scrollbar Track: Background area */
+.messages-container::-webkit-scrollbar-track {
+  background: transparent; /* Transparent background */
+}
+
+/* Messages Container Scrollbar Thumb: Draggable part */
+.messages-container::-webkit-scrollbar-thumb {
+  background: #cbd5e0; /* Light gray */
+  border-radius: 3px; /* Rounded corners */
+}
+
+/* Messages Container Scrollbar Thumb Hover: Highlight on hover */
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0; /* Darker gray on hover */
+}
+
+/* Input Container: Container for message input field and button */
+.input-container {
+  display: flex; /* Flexbox layout */
+  padding: 16px; /* Internal padding */
+  background: white; /* White background */
+  border-top: 1px solid #e2e8f0; /* Top border */
+  gap: 12px; /* Space between elements */
+}
+
+/* Chat Input: Text input field for messages (alternative name) */
+.chat-input {
+  flex: 1; /* Take remaining space */
+  padding: 12px 16px; /* Internal padding */
+  border: 2px solid #e2e8f0; /* Light gray border */
+  border-radius: 24px; /* Fully rounded corners */
+  font-size: 15px; /* Regular text size */
+  outline: none; /* Remove default outline */
+  transition: border-color 0.2s; /* Smooth border transition */
+  font-family: inherit; /* Use inherited font */
+}
+
+/* Chat Input Focus: Styling when input is focused */
+.chat-input:focus {
+  border-color: #667eea; /* Blue border on focus */
+}
+
+/* Send Button: Alternative button styling */
+.send-button {
+  padding: 12px 28px; /* Internal padding */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple gradient */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 24px; /* Fully rounded corners */
+  font-size: 15px; /* Regular text size */
+  font-weight: 600; /* Semi-bold */
+  cursor: pointer; /* Pointer on click */
+  transition: transform 0.2s, box-shadow 0.2s; /* Smooth transitions */
+  font-family: inherit; /* Use inherited font */
+}
+
+/* Send Button Hover: Highlight on hover */
+.send-button:hover {
+  transform: translateY(-2px); /* Slight upward movement */
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4); /* Purple shadow */
+}
+
+/* Send Button Active: Styling when clicked */
+.send-button:active {
+  transform: translateY(0); /* Return to normal position */
+}
+
+/* Send Button Disabled: Styling when button is disabled */
+.send-button:disabled {
+  opacity: 0.6; /* Semi-transparent when disabled */
+  cursor: not-allowed; /* Not-allowed cursor */
+}
+
+/* Mobile Responsive: Adjust layout for small screens */
+@media (max-width: 600px) {
+  /* Chat Container: Full screen on mobile */
+  .chat-container {
+    width: 100%; /* Full width */
+    height: 100vh; /* Full viewport height */
+    max-height: 100vh; /* Cap at viewport height */
+    border-radius: 0; /* No rounded corners */
+  }
+
+  /* Message Content: Wider on mobile since there's less space */
+  .message-content {
+    max-width: 85%; /* Allow wider messages */
+  }
+
+  /* Chat Header Title: Smaller on mobile */
+  .chat-header h1 {
+    font-size: 20px; /* Reduced heading size */
+  }
+
+  /* Input Container: Less padding on mobile */
+  .input-container {
+    padding: 12px; /* Reduced padding */
+  }
+}
