@@ -1,17 +1,17 @@
-import json
-import boto3
+import json 
+import boto3 
 import urllib.request
-import os
+import os 
 
-# KONFIGURATION
-S3_BUCKET = "wagp-regional-carrer-bot-group9"
+# KONFIGURATION 
+S3_BUCKET = "wagp-regional-carrer-bot-group9" 
 S3_FILE = "wissen.json"
 API_KEY = os.getenv("OPENAI_API_KEY")
 print("API_KEY gesetzt:", bool(API_KEY))
 
-s3 = boto3.client('s3')
+s3 = boto3.client('s3') 
 
-def lambda_handler(event, context):
+def lambda_handler(event, context): 
     # Handle CORS preflight request (OPTIONS)
     if event.get('httpMethod') == 'OPTIONS':
         return {
@@ -77,9 +77,9 @@ def lambda_handler(event, context):
                 'body': json.dumps({'antwort': 'Keine Frage erhalten. Bitte sende eine Nachricht im Format: {"frage": "deine Frage"}'})
             }
 
-        # 2. Wissen aus S3 laden
-        obj = s3.get_object(Bucket=S3_BUCKET, Key=S3_FILE)
-        wissen = obj['Body'].read().decode('utf-8')
+        # 2. Wissen aus S3 laden 
+        obj = s3.get_object(Bucket=S3_BUCKET, Key=S3_FILE) 
+        wissen = obj['Body'].read().decode('utf-8') 
 
         # 3. KI Logik – OpenAI API Aufruf
         url = "https://api.openai.com/v1/chat/completions"
@@ -124,15 +124,15 @@ FRAGE:
         }
 
         req = urllib.request.Request(
-            url,
-            data=json.dumps(data).encode(),
+            url, 
+            data=json.dumps(data).encode(), 
             headers={
-                "Authorization": f"Bearer {API_KEY}",
+                "Authorization": f"Bearer {API_KEY}", 
                 "Content-Type": "application/json"
             }
-        )
+        ) 
         
-        response = urllib.request.urlopen(req)
+        response = urllib.request.urlopen(req) 
         raw = json.loads(response.read())
         
         print("OpenAI RAW RESPONSE:", json.dumps(raw, indent=2))
