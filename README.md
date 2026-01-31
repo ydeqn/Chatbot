@@ -1,5 +1,5 @@
 # Chatbot
- Chatbot Prototyp für ein WAGP Projekt der TH Köln. Die Dateien sind nur für das Verzeichnis des Codes gelistet. Funktionalität erfordert noch entsprechende Umgebungen um zu funktionieren.
+ Chatbot Prototyp für ein WAGP Projekt der TH Köln. Die Dateien sind nur für das Verzeichnis des Codes gelistet. Funktionalität mit dem Code erfordert noch entsprechende Umgebungen um zu funktionieren. Bei Bedarf kann die rag-desktop.exe ausgeführt werden zum testen
 
 # Nützliche Informationen
 Dies ist ein Prototyp. Es sind noch viele Verbesserungsmöglichkeiten offen. Zu dem ist die Programm Optimierung noch nicht erfolgt.
